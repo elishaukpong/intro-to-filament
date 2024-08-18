@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Filament\Forms\Components\CheckboxList;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -39,18 +40,19 @@ class Speaker extends Model
     public static function getForm()
     {
         return [
-           TextInput::make('name')
+            TextInput::make('name')
                 ->required()
                 ->maxLength(255),
-           TextInput::make('email')
+            FileUpload::make('avatar')
+                ->avatar()
+                ->imageEditor(),
+            TextInput::make('email')
+                ->required()
                 ->email()
-                ->required()
                 ->maxLength(255),
-           Textarea::make('bio')
-                ->required()
+            Textarea::make('bio')
                 ->columnSpanFull(),
-           TextInput::make('twitter_handle')
-                ->required()
+            TextInput::make('twitter_handle')
                 ->maxLength(255),
             CheckboxList::make('qualifications')
                 ->columnSpanFull()

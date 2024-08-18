@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enum\Region;
+use App\Enum\Status;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\MarkdownEditor;
@@ -11,6 +12,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Get;
+use Filament\Widgets\StatsOverviewWidget\Stat;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -76,11 +78,8 @@ class Conference extends Model
                         ->columns(1)
                         ->schema([
                             Select::make('status')
-                                ->options([
-                                    'draft' => 'Draft',
-                                    'published' => 'Published',
-                                    'archived' => 'Archived'
-                                ]),
+                                ->enum(Status::class)
+                                ->options(Status::class),
                             Toggle::make('is_published')
                                 ->default(false),
                         ])
