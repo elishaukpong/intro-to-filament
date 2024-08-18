@@ -6,6 +6,7 @@ use App\Enum\Region;
 use App\Filament\Resources\ConferenceResource\Pages;
 use App\Filament\Resources\ConferenceResource\RelationManagers;
 use App\Models\Conference;
+use App\Models\Venue;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -49,8 +50,11 @@ class ConferenceResource extends Resource
                     ->options(Region::class),
                 Forms\Components\Select::make('venue_id')
                     ->searchable()
+                    ->editOptionForm(Venue::getForm())
+                    ->createOptionForm(Venue::getForm())
+                    ->preload()
                     ->relationship('venue', 'name', function(Builder $query, Forms\Get $get){
-                        return $query->where('region',$get->get('region'));
+                        return $query->where('region',$get('region'));
                     }),
             ]);
     }
