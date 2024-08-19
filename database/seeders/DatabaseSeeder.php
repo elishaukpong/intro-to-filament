@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Speaker;
+use App\Models\Talk;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Venue;
@@ -24,5 +26,6 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Venue::factory()->count(200)->create();
+        Speaker::factory()->count(20)->withTalks(4)->create();
     }
 }
