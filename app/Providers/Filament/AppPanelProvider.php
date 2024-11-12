@@ -19,6 +19,7 @@ use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Stephenjude\FilamentTwoFactorAuthentication\TwoFactorAuthenticationPlugin;
 
 class AppPanelProvider extends PanelProvider
 {
@@ -29,6 +30,11 @@ class AppPanelProvider extends PanelProvider
             ->id('app')
             ->path('/')
             ->login()
+            ->plugins([
+                TwoFactorAuthenticationPlugin::make()
+                    ->addTwoFactorMenuItem()
+                    ->enforceTwoFactorSetup()
+            ])
             ->colors([
                 'primary' => Color::Indigo,
                 'gray' => Color::Slate

@@ -23,24 +23,23 @@ class AttendeeResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
-            ->schema([
-                Forms\Components\TextInput::make('conference_id')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('user_id')
-                    ->required()
-                    ->numeric(),
-            ]);
+            ->schema(Attendee::getForm());
     }
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('conference_id')
+                Tables\Columns\TextColumn::make('name')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('email')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('ticket_cost')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('user_id')
+                Tables\Columns\IconColumn::make('is_paid')
+                    ->boolean(),
+                Tables\Columns\TextColumn::make('conference.name')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
@@ -72,19 +71,19 @@ class AttendeeResource extends Resource
         ];
     }
 
+    public static function getWidgets(): array
+    {
+        return [
+            AttendeeChartWidget::class
+        ];
+    }
+
     public static function getPages(): array
     {
         return [
             'index' => Pages\ListAttendees::route('/'),
             'create' => Pages\CreateAttendee::route('/create'),
             'edit' => Pages\EditAttendee::route('/{record}/edit'),
-        ];
-    }
-
-    public static function getWidgets(): array
-    {
-        return [
-            AttendeeChartWidget::class,
         ];
     }
 }

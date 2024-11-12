@@ -20,7 +20,7 @@ class ListAttendees extends ListRecords
     protected function getHeaderWidgets(): array
     {
         return [
-            AttendeeResource\Widgets\AttendeeChartWidget::class,
+            AttendeeResource\Widgets\AttendeeChartWidget::class
         ];
     }
 }

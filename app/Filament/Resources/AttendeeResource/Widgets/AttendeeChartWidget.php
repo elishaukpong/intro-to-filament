@@ -29,7 +29,7 @@ class AttendeeChartWidget extends BaseWidget
                 ->descriptionIcon('heroicon-o-user-group')
                 ->color('success')
                 ->chart([1,2,3,4,5,4,1,1]),
-//            Stat::make('Total Revenue', $this->getPageTableQuery()->sum('ticket_cost') / 100),
+            Stat::make('Total Revenue', $this->getPageTableQuery()->sum('ticket_cost') / 100),
         ];
     }
 }

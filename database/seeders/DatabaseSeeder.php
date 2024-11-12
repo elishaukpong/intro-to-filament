@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Attendee;
+use App\Models\Conference;
 use App\Models\Speaker;
 use App\Models\Talk;
 use App\Models\User;
@@ -17,7 +19,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+         User::factory(10)->create();
 
         User::factory()->create([
             'name' => 'Test User',
@@ -27,5 +29,9 @@ class DatabaseSeeder extends Seeder
 
         Venue::factory()->count(200)->create();
         Speaker::factory()->count(20)->withTalks(4)->create();
+        Attendee::factory()
+            ->count(20)
+            ->forConference(Conference::factory()->create())
+            ->create();
     }
 }
